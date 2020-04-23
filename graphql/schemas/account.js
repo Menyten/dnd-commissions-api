@@ -5,7 +5,6 @@ const account = `
     firstname: String!
     lastname: String!
     email: String!
-    password: String!
     age: String!
     role: String!
     createdAt: String!

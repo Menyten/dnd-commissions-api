@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const accountSchema = mongoose.Schema(
   {
@@ -38,6 +39,13 @@ const accountSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+accountSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
+  next();
+});
 
 const Account = mongoose.model('Account', accountSchema);
 
