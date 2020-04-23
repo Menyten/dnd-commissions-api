@@ -1,18 +1,9 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import { buildSchema } from 'graphql';
+import schema from './graphql';
+import rootValue from './graphql/resolvers';
 
 const PORT = process.env.PORT || 3000;
-
-const schema = buildSchema(`
-  type Query {
-    hello: String!
-  }
-`);
-
-const root = {
-  hello: () => 'Hello World',
-};
 
 const app = express();
 
@@ -20,7 +11,7 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    rootValue: root,
+    rootValue,
     graphiql: true,
   })
 );
@@ -37,4 +28,4 @@ const startServer = () =>
     )
   );
 
-module.exports = startServer;
+export default startServer;

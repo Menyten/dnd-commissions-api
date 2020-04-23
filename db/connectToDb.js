@@ -5,9 +5,10 @@ const connectToDb = () => {
     .connect(process.env.MONGO_DB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     })
     .catch(() => console.log('Error connecting to DB'));
   return mongoose.connection;
 };
 
-module.exports = connectToDb;
+export default connectToDb;

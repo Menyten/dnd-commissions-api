@@ -1,8 +1,8 @@
-require("dotenv").config();
-const connectToDb = require("./db/connectToDb");
-const startServer = require("./server");
+require('dotenv').config();
+import connectToDb from './db/connectToDb';
+import startServer from './server';
 
-connectToDb().once("open", () => {
-  console.log("Connected to DB");
+connectToDb().once('open', () => {
+  console.log('Connected to DB');
   startServer();
 });
