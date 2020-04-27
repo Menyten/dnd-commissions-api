@@ -1,19 +1,20 @@
 import { buildSchema } from 'graphql';
 import schemas from './schemas';
+import queries from './queries';
 import mutations from './mutations';
 
 export default buildSchema(`
-  ${schemas}
+${schemas}
 
-  type RootQuery {
-    accounts: [Account!]
-  }
+type RootQuery {
+  ${queries}
+}
 
-  type RootMutation {
-    ${mutations}
-  }
+type RootMutation {
+  ${mutations}
+}
 
-  schema {
+schema {
     query: RootQuery
     mutation: RootMutation
   }

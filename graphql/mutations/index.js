@@ -1,5 +1,3 @@
-import accountMutations from './accountMutations';
-
 export default `
-  ${accountMutations}
+  createAccount(accountInput: AccountInput): Account
 `;

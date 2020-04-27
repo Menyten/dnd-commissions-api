@@ -1,4 +1,4 @@
-const account = `
+export default `
   type Account {
     _id: ID
     username: String!
@@ -9,9 +9,7 @@ const account = `
     role: String!
     createdAt: String!
   }
-`;
 
-const accountInput = `
   input AccountInput {
     username: String!
     firstname: String!
@@ -20,9 +18,4 @@ const accountInput = `
     password: String!
     age: String!
   }
-`;
-
-export default `
-  ${account}
-  ${accountInput}
 `;

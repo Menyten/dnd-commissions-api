@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 const startServer = () =>
   app.listen(PORT, () =>
     console.log(
-      `Listening on port ${PORT} GraphiQL http://localhost:${PORT}/graphql`
+      `Listening on port ${PORT} - GraphiQL http://localhost:${PORT}/graphql`
     )
   );
 
