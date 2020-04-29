@@ -1,6 +1,6 @@
 export default `
   type Account {
-    _id: ID
+    _id: ID!
     username: String!
     firstname: String!
     lastname: String!
