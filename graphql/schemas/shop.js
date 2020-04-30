@@ -8,11 +8,11 @@ type Shop {
     finishedOrders: [Order]
     currentOrders: [Order]
     examplesToDisplay: [ExampleProject]
-    ratings: [Number]!
+    ratings: [Int]!
     reviews: [Review]
   }
 
-  input CreateShopInput {
+  input ShopInput {
     shopkeeper: ID!
     shopTitle: String!
     shopDescription: String!

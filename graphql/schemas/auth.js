@@ -1,4 +1,4 @@
-const auth = `
+export default `
   type Token {
      token: String!
   }
@@ -8,5 +8,3 @@ const auth = `
     password: String!
   }
 `;
-
-export default auth;

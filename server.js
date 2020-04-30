@@ -2,11 +2,13 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import schema from './graphql';
 import rootValue from './graphql/resolvers';
+import auth from './middleware/auth';
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(auth);
 app.use(
   '/graphql',
   graphqlHTTP({

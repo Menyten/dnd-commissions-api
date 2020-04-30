@@ -34,7 +34,6 @@ const accountSchema = mongoose.Schema(
       type: String,
       default: 'user',
     },
-    tokens: [String],
   },
   {
     timestamps: true,
@@ -51,9 +50,7 @@ accountSchema.methods.generateAuthToken = function () {
   return token;
 };
 
-accountSchema.statics.findByCredentials = async ({
-  signInInput: { email, password },
-}) => {
+accountSchema.statics.findByCredentials = async (email, password) => {
   const user = await Account.findOne({ email });
   if (!user) {
     throw new Error('Unable to login');
