@@ -1,7 +1,7 @@
 export default `
 type Shop {
     _id: ID!
-    shopkeeper: ID!
+    shopkeeperId: ID!
     shopTitle: String!
     shopDescription: String!
     shopImage: String
@@ -10,10 +10,12 @@ type Shop {
     examplesToDisplay: [ExampleProject]
     ratings: [Int]!
     reviews: [Review]
+    createdAt: String!
+    updatedAt: String!
   }
 
   input ShopInput {
-    shopkeeper: ID!
+    shopkeeperId: ID!
     shopTitle: String!
     shopDescription: String!
   }

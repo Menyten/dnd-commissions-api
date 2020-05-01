@@ -41,12 +41,10 @@ const accountSchema = mongoose.Schema(
 );
 
 accountSchema.methods.generateAuthToken = function () {
-  const { _id, role } = this;
-  const token = jwt.sign(
-    { _id: _id.toString(), role },
-    process.env.JWT_SECRET,
-    { expiresIn: '1d' }
-  );
+  const { _id } = this;
+  const token = jwt.sign({ _id: _id.toString() }, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
   return token;
 };
 
