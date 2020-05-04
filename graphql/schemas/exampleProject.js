@@ -4,4 +4,9 @@ export default `
     image: String!
     description: String!
   }
+
+  input ExampleProjectInput {
+    image: String!
+    description: String!
+  }
 `;

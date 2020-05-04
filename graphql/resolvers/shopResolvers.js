@@ -25,4 +25,19 @@ export default {
     if (!shop) throw new Error('Shop not found');
     return shop;
   },
+  updateShop: async (args, req) => {
+    if (!req.isAuth) throw new Error('Unauthorized');
+    const shop = await Shop.findById(args.shopId);
+    if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
+    const updatedShop = await Shop.findByIdAndUpdate(
+      args.shopId,
+      { ...args },
+      { new: true }
+    )
+      .lean()
+      .catch(err => {
+        if (err) throw new Error('Error updating shop');
+      });
+    return updatedShop;
+  },
 };
