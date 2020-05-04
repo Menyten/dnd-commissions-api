@@ -6,6 +6,7 @@ const connectToDb = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     })
     .catch(() => console.log('Error connecting to DB'));
   return mongoose.connection;
