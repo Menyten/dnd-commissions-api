@@ -21,8 +21,8 @@ export default {
     console.log(shopId);
     const shop = await Shop.findById(shopId)
       .lean()
-      .catch(err => {
-        if (err) throw new Error('Shop not found');
+      .catch(() => {
+        throw new Error('Shop not found');
       });
     if (!shop) throw new Error('Shop not found');
     return shop;
@@ -30,8 +30,8 @@ export default {
 
   updateShop: async (args, req) => {
     if (!req.isAuth) throw new Error('Unauthorized');
-    const shop = await Shop.findById(args.shopId).catch(err => {
-      if (err) throw new Error('Shop not found');
+    const shop = await Shop.findById(args.shopId).catch(() => {
+      throw new Error('Shop not found');
     });
     if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
     const updatedShop = await Shop.findByIdAndUpdate(
@@ -40,21 +40,39 @@ export default {
       { new: true }
     )
       .lean()
-      .catch(err => {
-        if (err) throw new Error('Error updating shop');
+      .catch(() => {
+        throw new Error('Error updating shop');
       });
     return updatedShop;
   },
 
-  addExampleProject: async (args, req) => {
+  addExampleProject: async (
+    { exampleProjectInput: { shopId, image, description } },
+    req
+  ) => {
     if (!req.isAuth) throw new Error('Unauthorized');
-    const shop = await Shop.findById(args.shopId).catch(err => {
-      if (err) throw new Error('Shop not found');
+
+    const shop = await Shop.findById(shopId).catch(() => {
+      throw new Error('Shop not found');
     });
-    console.log(shop);
     if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
-    const newExampleProject = new ExampleProject({ ...args });
-    const savedExampleProject = await newExampleProject.save();
-    console.log(savedExampleProject);
+
+    const newExampleProject = new ExampleProject({
+      shopId,
+      image,
+      description,
+    });
+    const savedExampleProject = await newExampleProject.save().catch(() => {
+      throw new Error('Error creating example project');
+    });
+    shop.examplesToDisplay = [
+      ...shop.examplesToDisplay,
+      savedExampleProject._id,
+    ];
+    await shop.save();
+    const updatedShop = await Shop.findById(shop._id)
+      .populate({ path: 'examplesToDisplay', model: 'ExampleProject' })
+      .exec();
+    return updatedShop;
   },
 };

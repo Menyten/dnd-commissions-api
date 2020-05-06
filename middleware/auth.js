@@ -12,13 +12,15 @@ export default async (req, res, next) => {
     req.isAuth = false;
     return next();
   }
-  const decoded = jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
+  let decoded = null;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    if (error) {
       req.isAuth = false;
       return next();
     }
-    return decoded;
-  });
+  }
   const user = await Account.findById(decoded._id).select('-password');
   if (!user) {
     req.isAuth = false;
