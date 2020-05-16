@@ -1,7 +1,15 @@
 export default `
   type Order {
-    buyer: ID!
-    seller: ID!
+    buyerId: ID!
+    shopId: ID!
+    price: Float!
+    orderDescription: String!
+    status: String!
+  }
+
+  input OrderInput {
+    buyerId: ID!
+    shopId: ID!
     price: Float!
     orderDescription: String!
   }

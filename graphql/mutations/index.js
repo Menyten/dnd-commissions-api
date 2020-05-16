@@ -1,6 +1,7 @@
 export default `
-  createAccount(accountInput: AccountInput): Account
-  createShop(shopInput: ShopInput): Shop
-  updateShop(shopId: String, shopTitle: String, shopDescription: String, shopImage: String): Shop
-  addExampleProject(exampleProjectInput: ExampleProjectInput): Shop
+  createAccount(accountInput: AccountInput): Account!
+  createOrder(orderInput: OrderInput): Order!
+  createShop(shopInput: ShopInput): Shop!
+  updateShop(shopId: String, shopTitle: String, shopDescription: String, shopImage: String): Shop!
+  addExampleProject(exampleProjectInput: ExampleProjectInput): Shop!
 `;
