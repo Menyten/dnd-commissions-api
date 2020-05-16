@@ -62,14 +62,13 @@ export default {
       image,
       description,
     });
-    const savedDisplayProduct = await newDisplayProduct.save().catch(() => {
+
+    await newDisplayProduct.save().catch(() => {
       throw new Error('Error creating display product');
     });
-    shop.displayProducts = [...shop.displayProducts, savedDisplayProduct._id];
-    await shop.save();
-    const updatedShop = await Shop.findById(shop._id)
-      .populate({ path: 'displayProducts', model: 'DisplayProduct' })
-      .exec();
-    return updatedShop;
+
+    const displayProducts = await DisplayProduct.find({ shopId }).lean();
+
+    return displayProducts;
   },
 };
