@@ -3,6 +3,11 @@ import Order from '../../models/order';
 
 export default {
   accounts: async () => await Account.find().lean(),
+  signIn: async ({ signInInput: { email, password } }) => {
+    const user = await Account.findByCredentials(email, password);
+    const token = user.generateAuthToken();
+    return { token };
+  },
   createAccount: async args => {
     const account = new Account({
       ...args.accountInput,
@@ -23,5 +28,15 @@ export default {
     });
 
     return result;
+  },
+  fetchOrders: async (args, req) => {
+    if (!req.isAuth) throw new Error('Unauthorized');
+    const orders = await Order.find({ buyerId: req.userId })
+      .populate({ path: 'shop' })
+      .catch(error => {
+        throw new Error(error);
+      });
+
+    return orders;
   },
 };

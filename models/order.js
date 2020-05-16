@@ -5,10 +5,12 @@ const orderSchema = mongoose.Schema({
   buyerId: {
     type: ObjectID,
     required: true,
+    ref: 'Account',
   },
-  shopId: {
+  shop: {
     type: ObjectID,
     required: true,
+    ref: 'Shop',
   },
   price: {
     type: Number,

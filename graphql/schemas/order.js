@@ -1,7 +1,8 @@
 export default `
   type Order {
+
     buyerId: ID!
-    shopId: ID!
+    shop: Shop!
     price: Float!
     orderDescription: String!
     status: String!
