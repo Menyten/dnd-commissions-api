@@ -1,6 +1,6 @@
 import Account from '../../models/account';
 import Shop from '../../models/shop';
-import ExampleProject from '../../models/exampleProject';
+import DisplayProduct from '../../models/displayProduct';
 
 export default {
   createShop: async (args, req) => {
@@ -46,8 +46,8 @@ export default {
     return updatedShop;
   },
 
-  addExampleProject: async (
-    { exampleProjectInput: { shopId, image, description } },
+  createDisplayProduct: async (
+    { displayProductInput: { shopId, image, description } },
     req
   ) => {
     if (!req.isAuth) throw new Error('Unauthorized');
@@ -57,21 +57,18 @@ export default {
     });
     if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
 
-    const newExampleProject = new ExampleProject({
+    const newDisplayProduct = new DisplayProduct({
       shopId,
       image,
       description,
     });
-    const savedExampleProject = await newExampleProject.save().catch(() => {
-      throw new Error('Error creating example project');
+    const savedDisplayProduct = await newDisplayProduct.save().catch(() => {
+      throw new Error('Error creating display product');
     });
-    shop.examplesToDisplay = [
-      ...shop.examplesToDisplay,
-      savedExampleProject._id,
-    ];
+    shop.displayProducts = [...shop.displayProducts, savedDisplayProduct._id];
     await shop.save();
     const updatedShop = await Shop.findById(shop._id)
-      .populate({ path: 'examplesToDisplay', model: 'ExampleProject' })
+      .populate({ path: 'displayProducts', model: 'DisplayProduct' })
       .exec();
     return updatedShop;
   },

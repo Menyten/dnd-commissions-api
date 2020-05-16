@@ -3,7 +3,7 @@ import authSchema from './auth';
 import shopSchema from './shop';
 import reviewSchema from './review';
 import orderSchema from './order';
-import exampleProjectSchema from './exampleProject';
+import displayProductSchema from './displayProduct';
 
 export default `
   ${accountSchema}
@@ -11,5 +11,5 @@ export default `
   ${shopSchema}
   ${reviewSchema}
   ${orderSchema}
-  ${exampleProjectSchema}
+  ${displayProductSchema}
 `;

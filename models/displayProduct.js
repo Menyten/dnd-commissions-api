@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const ObjectID = mongoose.Schema.Types.ObjectId;
 
-const exampleProjectSchema = mongoose.Schema({
+const displayProductSchema = mongoose.Schema({
   shopId: {
     type: ObjectID,
     required: true,
@@ -15,6 +15,6 @@ const exampleProjectSchema = mongoose.Schema({
   },
 });
 
-const ExampleProject = mongoose.model('ExampleProject', exampleProjectSchema);
+const DisplayProduct = mongoose.model('DisplayProduct', displayProductSchema);
 
-export default ExampleProject;
+export default DisplayProduct;

@@ -1,12 +1,12 @@
 export default `
-  type ExampleProject {
+  type DisplayProduct {
     _id: ID!
     shopId: ID!
     image: String!
     description: String!
   }
 
-  input ExampleProjectInput {
+  input DisplayProductInput {
     shopId: ID!
     image: String!
     description: String!

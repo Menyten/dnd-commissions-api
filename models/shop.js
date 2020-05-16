@@ -19,6 +19,10 @@ const shopSchema = mongoose.Schema(
     shopImage: {
       type: String,
     },
+    products: {
+      type: [ObjectID],
+      ref: 'Product',
+    },
     finishedOrders: {
       type: [ObjectID],
       ref: 'Order',
@@ -27,9 +31,9 @@ const shopSchema = mongoose.Schema(
       type: [ObjectID],
       ref: 'Order',
     },
-    examplesToDisplay: {
+    displayProducts: {
       type: [ObjectID],
-      ref: 'ExampleProject',
+      ref: 'DisplayProduct',
     },
     ratings: {
       type: [Number],

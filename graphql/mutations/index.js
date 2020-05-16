@@ -3,5 +3,5 @@ export default `
   createOrder(orderInput: OrderInput): Order!
   createShop(shopInput: ShopInput): Shop!
   updateShop(shopId: String, shopTitle: String, shopDescription: String, shopImage: String): Shop!
-  addExampleProject(exampleProjectInput: ExampleProjectInput): Shop!
+  createDisplayProduct(displayProductInput: DisplayProductInput): Shop!
 `;

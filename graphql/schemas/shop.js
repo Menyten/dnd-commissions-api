@@ -7,7 +7,7 @@ type Shop {
     shopImage: String
     finishedOrders: [Order]
     currentOrders: [Order]
-    examplesToDisplay: [ExampleProject]
+    displayProducts: [DisplayProduct]
     ratings: [Int]!
     reviews: [Review]
     createdAt: String!
