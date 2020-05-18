@@ -19,22 +19,6 @@ const shopSchema = mongoose.Schema(
     shopImage: {
       type: String,
     },
-    products: {
-      type: [ObjectID],
-      ref: 'Product',
-    },
-    finishedOrders: {
-      type: [ObjectID],
-      ref: 'Order',
-    },
-    currentOrders: {
-      type: [ObjectID],
-      ref: 'Order',
-    },
-    displayProducts: {
-      type: [ObjectID],
-      ref: 'DisplayProduct',
-    },
     ratings: {
       type: Number,
     },

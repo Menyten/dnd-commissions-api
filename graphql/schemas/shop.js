@@ -5,10 +5,11 @@ type Shop {
     shopTitle: String!
     shopDescription: String!
     shopImage: String
+    products: [Product]
     finishedOrders: [Order]
     currentOrders: [Order]
     displayProducts: [DisplayProduct]
-    ratings: [Int]!
+    ratings: Int!
     reviews: [Review]
     createdAt: String!
     updatedAt: String!

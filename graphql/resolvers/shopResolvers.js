@@ -1,5 +1,6 @@
 import Account from '../../models/account';
 import Shop from '../../models/shop';
+import Product from '../../models/product';
 import DisplayProduct from '../../models/displayProduct';
 
 export default {
@@ -18,14 +19,27 @@ export default {
   },
 
   fetchShop: async ({ shopId }) => {
-    console.log(shopId);
-    const shop = await Shop.findById(shopId)
-      .lean()
-      .catch(() => {
-        throw new Error('Shop not found');
-      });
+    const shop = await Shop.findById(shopId, (err, res) => {
+      if (err) throw new Error('Shop not found');
+      return res;
+    }).lean();
     if (!shop) throw new Error('Shop not found');
-    return shop;
+
+    const products = await Product.find({ shopId }, (err, res) => {
+      if (err) throw new Error('Something went wrong finding products');
+      return res;
+    });
+
+    const displayProducts = await DisplayProduct.find(
+      { shopId },
+      (err, res) => {
+        if (err)
+          throw new Error('Something went wrong finding display products');
+        return res;
+      }
+    );
+
+    return { ...shop, products, displayProducts };
   },
 
   updateShop: async (args, req) => {
@@ -46,7 +60,20 @@ export default {
     return updatedShop;
   },
 
-  createProduct: async (args, req) => {},
+  createProduct: async (args, req) => {
+    if (!req.isAuth) throw new Error('Unauthorized');
+    const shop = await Shop.findById(args.shopId, (err, res) => {
+      if (err) throw new Error('Shop not found');
+      return res;
+    });
+    if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
+
+    const newProduct = new Product({ ...args });
+    await newProduct.save();
+    const products = await Product.find({ shopId: args.shopId });
+
+    return products;
+  },
 
   createDisplayProduct: async (
     { displayProductInput: { shopId, image, description } },
@@ -54,8 +81,9 @@ export default {
   ) => {
     if (!req.isAuth) throw new Error('Unauthorized');
 
-    const shop = await Shop.findById(shopId).catch(() => {
-      throw new Error('Shop not found');
+    const shop = await Shop.findById(shopId, (err, res) => {
+      if (err) throw new Error('Shop not found');
+      return res;
     });
     if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
 
