@@ -18,17 +18,19 @@ export default {
 
     return result;
   },
+
   createOrder: async ({ orderInput }, req) => {
     if (!req.isAuth) throw new Error('Unauthorized');
     if (req.userId !== orderInput.buyerId) throw new Error('Unauthorized');
 
     const order = new Order(orderInput);
-    const result = await order.save().catch(error => {
-      throw new Error(error);
+    const saved = await order.save().catch(() => {
+      throw new Error('Error creating order');
     });
 
-    return result;
+    return saved;
   },
+
   fetchOrders: async (args, req) => {
     if (!req.isAuth) throw new Error('Unauthorized');
     const orders = await Order.find({ buyerId: req.userId })

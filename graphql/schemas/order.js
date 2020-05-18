@@ -14,5 +14,6 @@ export default `
     shopId: ID!
     totalPrice: Float!
     orderDescription: String!
+    products: [ID]!
   }
 `;
