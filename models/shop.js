@@ -5,8 +5,8 @@ const shopSchema = mongoose.Schema(
   {
     shopkeeperId: {
       type: ObjectID,
-      ref: 'Account',
       required: true,
+      ref: 'Account',
     },
     shopTitle: {
       type: String,
@@ -36,7 +36,7 @@ const shopSchema = mongoose.Schema(
       ref: 'DisplayProduct',
     },
     ratings: {
-      type: [Number],
+      type: Number,
     },
     reviews: {
       type: [ObjectID],

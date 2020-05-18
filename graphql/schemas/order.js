@@ -1,9 +1,10 @@
 export default `
   type Order {
-
+    _id: ID!
     buyerId: ID!
-    shop: Shop!
-    price: Float!
+    shopId: ID!
+    products: [Product]!
+    totalPrice: Float!
     orderDescription: String!
     status: String!
   }
@@ -11,7 +12,7 @@ export default `
   input OrderInput {
     buyerId: ID!
     shopId: ID!
-    price: Float!
+    totalPrice: Float!
     orderDescription: String!
   }
 `;

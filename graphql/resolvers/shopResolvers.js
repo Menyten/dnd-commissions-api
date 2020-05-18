@@ -46,6 +46,8 @@ export default {
     return updatedShop;
   },
 
+  createProduct: async (args, req) => {},
+
   createDisplayProduct: async (
     { displayProductInput: { shopId, image, description } },
     req
