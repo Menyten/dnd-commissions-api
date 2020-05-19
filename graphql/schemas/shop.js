@@ -16,7 +16,6 @@ type Shop {
   }
 
   input ShopInput {
-    shopkeeperId: ID!
     shopTitle: String!
     shopDescription: String!
   }
