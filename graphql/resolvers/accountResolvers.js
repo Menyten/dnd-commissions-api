@@ -3,20 +3,21 @@ import Order from '../../models/order';
 
 export default {
   accounts: async () => await Account.find().lean(),
-  signIn: async ({ signInInput: { email, password } }) => {
+  signIn: async ({ signInInput: { email, password } }, context) => {
     const user = await Account.findByCredentials(email, password);
     const token = user.generateAuthToken();
+    context.res.setHeader('Set-Cookie', `dnd_commissions=${token}; HttpOnly`);
     return { token };
   },
   createAccount: async args => {
     const account = new Account({
       ...args.accountInput,
     });
-    const result = await account.save().catch(error => {
-      throw new Error(error);
+    await account.save().catch(() => {
+      throw new Error('Error creating account');
     });
 
-    return result;
+    return 'Account created';
   },
 
   createOrder: async ({ orderInput }, req) => {

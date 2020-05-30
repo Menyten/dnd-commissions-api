@@ -4,7 +4,7 @@ import schema from './graphql';
 import rootValue from './graphql/resolvers';
 import auth from './middleware/auth';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(
 );
 
 // Test route to make sure the server is up
-app.get('/', (req, res) => {
+app.get('/ok', (req, res) => {
   res.send('ok');
 });
 
