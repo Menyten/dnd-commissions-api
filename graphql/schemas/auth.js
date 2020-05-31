@@ -1,6 +1,7 @@
 export default `
-  type Token {
+  type User {
      token: String!
+     user: Account!
   }
 
   input SignInInput {

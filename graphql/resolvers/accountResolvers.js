@@ -7,7 +7,8 @@ export default {
     const user = await Account.findByCredentials(email, password);
     const token = user.generateAuthToken();
     context.res.setHeader('Set-Cookie', `dnd_commissions=${token}; HttpOnly`);
-    return { token };
+    console.log(user);
+    return { token, user };
   },
   createAccount: async args => {
     const account = new Account({

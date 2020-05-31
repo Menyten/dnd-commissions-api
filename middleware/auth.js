@@ -1,13 +1,14 @@
 import jwt from 'jsonwebtoken';
+import getToken from '../helpers/getToken';
 import Account from '../models/account';
 
 export default async (req, res, next) => {
-  const authHeader = req.get('Authorization');
-  if (!authHeader) {
+  const authToken = getToken(req.get('cookie'));
+  if (!authToken) {
     req.isAuth = false;
     return next();
   }
-  const token = authHeader.split(' ')[1];
+  const token = authToken.split(' ')[1];
   if (!token || token === '') {
     req.isAuth = false;
     return next();
