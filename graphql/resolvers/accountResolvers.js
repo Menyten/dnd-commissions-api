@@ -10,6 +10,12 @@ export default {
     console.log(user);
     return { token, user };
   },
+  checkSignedIn: (args, req) => {
+    if (!req.isAuth) return;
+    const user = Account.findById(req.userId).lean();
+    const token = req.token;
+    return { user, token };
+  },
   createAccount: async args => {
     const account = new Account({
       ...args.accountInput,

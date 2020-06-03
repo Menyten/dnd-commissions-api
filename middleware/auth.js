@@ -3,12 +3,7 @@ import getToken from '../helpers/getToken';
 import Account from '../models/account';
 
 export default async (req, res, next) => {
-  const authToken = getToken(req.get('cookie'));
-  if (!authToken) {
-    req.isAuth = false;
-    return next();
-  }
-  const token = authToken.split(' ')[1];
+  const token = getToken(req.get('cookie'));
   if (!token || token === '') {
     req.isAuth = false;
     return next();
@@ -29,5 +24,6 @@ export default async (req, res, next) => {
   }
   req.isAuth = true;
   req.userId = decoded._id;
+  req.token = token;
   next();
 };
