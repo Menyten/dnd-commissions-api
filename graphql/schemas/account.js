@@ -8,6 +8,7 @@ export default `
     age: String!
     role: String!
     createdAt: String!
+    shopId: ID
   }
 
   input AccountInput {

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+const ObjectID = mongoose.Schema.Types.ObjectId;
 
 const accountSchema = mongoose.Schema(
   {
@@ -33,6 +34,9 @@ const accountSchema = mongoose.Schema(
     role: {
       type: String,
       default: 'user',
+    },
+    shopId: {
+      type: ObjectID,
     },
   },
   {
