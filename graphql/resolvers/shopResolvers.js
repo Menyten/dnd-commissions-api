@@ -25,6 +25,10 @@ export default {
     }).lean();
     if (!shop) throw new Error('Shop not found');
 
+    const owner = await Account.findById(shop.owner).lean().populate({
+      path: 'account',
+    });
+
     const products = await Product.find({ shopId }, (err, res) => {
       if (err) throw new Error('Something went wrong finding products');
       return res;
@@ -39,7 +43,7 @@ export default {
       }
     );
 
-    return { ...shop, products, displayProducts };
+    return { ...shop, products, displayProducts, owner };
   },
 
   updateShop: async (args, req) => {

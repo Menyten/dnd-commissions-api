@@ -3,7 +3,7 @@ const ObjectID = mongoose.Schema.Types.ObjectId;
 
 const shopSchema = mongoose.Schema(
   {
-    shopkeeperId: {
+    owner: {
       type: ObjectID,
       required: true,
       ref: 'Account',

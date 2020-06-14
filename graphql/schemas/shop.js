@@ -1,7 +1,7 @@
-export default `
-type Shop {
+export default /* GraphQL */ `
+  type Shop {
     _id: ID!
-    shopkeeperId: ID!
+    owner: PublicAccount!
     shopTitle: String!
     shopDescription: String!
     shopImage: String
