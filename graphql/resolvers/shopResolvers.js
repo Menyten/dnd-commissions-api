@@ -69,8 +69,10 @@ export default {
     const shop = await Shop.findById(args.shopId, (err, res) => {
       if (err) throw new Error('Shop not found');
       return res;
-    });
-    if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
+    })
+      .lean()
+      .populate({ path: 'account' });
+    if (req.userId !== `${shop.owner._id}`) throw new Error('Unauthorized');
 
     const newProduct = new Product({ ...args });
     await newProduct.save();
