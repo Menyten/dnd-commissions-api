@@ -5,4 +5,6 @@ export default `
   checkSignedIn: User
   fetchShop(shopId: ID): Shop!
   fetchOrders: [Order]
+  fetchProducts(query: String): [Product]
+  fetchProduct(productId: ID): Product
 `;
