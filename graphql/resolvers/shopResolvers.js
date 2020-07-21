@@ -9,7 +9,7 @@ export default {
     const user = await Account.findById(req.userId);
     if (user.role === 'shopkeeper')
       throw new Error('You can only have one shop!');
-    const shop = new Shop({ ...args.shopInput, shopkeeperId: req.userId });
+    const shop = new Shop({ ...args, shopkeeperId: req.userId });
     const result = await shop.save().catch(() => {
       throw new Error('Error creating shop');
     });
@@ -18,8 +18,8 @@ export default {
     return result;
   },
 
-  fetchShop: async ({ shopId }) => {
-    const shop = await Shop.findById(shopId, (err, res) => {
+  shop: async ({ id }) => {
+    const shop = await Shop.findById(id, (err, res) => {
       if (err) throw new Error('Shop not found');
       return res;
     }).lean();
@@ -29,19 +29,15 @@ export default {
       path: 'account',
     });
 
-    const products = await Product.find({ shopId }, (err, res) => {
+    const products = await Product.find({ id }, (err, res) => {
       if (err) throw new Error('Something went wrong finding products');
       return res;
     });
 
-    const displayProducts = await DisplayProduct.find(
-      { shopId },
-      (err, res) => {
-        if (err)
-          throw new Error('Something went wrong finding display products');
-        return res;
-      }
-    );
+    const displayProducts = await DisplayProduct.find({ id }, (err, res) => {
+      if (err) throw new Error('Something went wrong finding display products');
+      return res;
+    });
 
     return { ...shop, products, displayProducts, owner };
   },
@@ -51,7 +47,7 @@ export default {
     const shop = await Shop.findById(args.shopId).catch(() => {
       throw new Error('Shop not found');
     });
-    if (req.userId !== `${shop.shopkeeperId}`) throw new Error('Unauthorized');
+    if (req.userId !== `${shop.owner}`) throw new Error('Unauthorized');
     const updatedShop = await Shop.findByIdAndUpdate(
       args.shopId,
       { ...args },

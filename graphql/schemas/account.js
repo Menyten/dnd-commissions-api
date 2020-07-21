@@ -5,7 +5,7 @@ export default /* GraphQL */ `
     firstname: String!
     lastname: String!
     email: String!
-    age: String!
+    birthdate: String!
     role: String!
     createdAt: String!
     shopId: ID
@@ -17,14 +17,5 @@ export default /* GraphQL */ `
     firstname: String!
     lastname: String!
     email: String!
-  }
-
-  input AccountInput {
-    username: String!
-    firstname: String!
-    lastname: String!
-    email: String!
-    password: String!
-    age: String!
   }
 `;

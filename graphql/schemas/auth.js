@@ -1,11 +1,6 @@
-export default `
+export default /* GraphQL */ `
   type User {
-     token: String!
-     user: Account!
-  }
-
-  input SignInInput {
-    email: String!
-    password: String!
+    token: String!
+    user: Account!
   }
 `;

@@ -1,10 +1,8 @@
-export default `
+export default /* GraphQL */ `
+  me: User
+  orders: [Order]
+  shop(id: ID): Shop!
   accounts: [Account!]
-  signIn(signInInput: SignInInput): User!
-  signOut: String
-  checkSignedIn: User
-  fetchShop(shopId: ID): Shop!
-  fetchOrders: [Order]
-  fetchProducts(query: String): [Product]
-  fetchProduct(productId: ID): Product
+  product(id: ID): Product
+  products(query: String): [Product]
 `;

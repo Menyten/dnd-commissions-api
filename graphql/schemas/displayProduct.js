@@ -1,4 +1,4 @@
-export default `
+export default /* GraphQL */ `
   type DisplayProduct {
     _id: ID!
     shopId: ID!

@@ -27,7 +27,7 @@ const accountSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    age: {
+    birthdate: {
       type: String,
       required: true,
     },

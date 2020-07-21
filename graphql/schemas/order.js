@@ -1,4 +1,4 @@
-export default `
+export default /* GraphQL */ `
   type Order {
     _id: ID!
     buyerId: ID!
@@ -7,13 +7,5 @@ export default `
     totalPrice: Float!
     orderDescription: String!
     status: String!
-  }
-
-  input OrderInput {
-    buyerId: ID!
-    shopId: ID!
-    totalPrice: Float!
-    orderDescription: String!
-    products: [ID]!
   }
 `;
