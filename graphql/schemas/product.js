@@ -1,7 +1,7 @@
 export default /* GraphQL */ `
   type Product {
     _id: ID!
-    shopId: Shop!
+    shop: Shop!
     productTitle: String!
     productDescription: String!
     price: Float!

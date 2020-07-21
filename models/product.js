@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const ObjectID = mongoose.Schema.Types.ObjectId;
 
 const productSchema = mongoose.Schema({
-  shopId: {
+  shop: {
     type: ObjectID,
     required: true,
     ref: 'Shop',
