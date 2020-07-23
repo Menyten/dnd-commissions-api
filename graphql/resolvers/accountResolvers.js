@@ -3,7 +3,7 @@ import Order from '../../models/order';
 
 export default {
   accounts: async () => await Account.find().lean(),
-  signIn: async ({ email, password }, context) => {
+  login: async ({ email, password }, context) => {
     const user = await Account.findByCredentials(email, password);
     const token = user.generateAuthToken();
     context.res.setHeader('Set-Cookie', `dnd_commissions=${token}; HttpOnly`);

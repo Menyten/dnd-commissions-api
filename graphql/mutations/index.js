@@ -1,5 +1,5 @@
 export default /* GraphQL */ `
-  signIn(email: String!, password: String!): User!
+  login(email: String!, password: String!): User!
   signOut: String
 
   createAccount(username: String!, firstname: String!, lastname: String!, email: String!, password: String!, birthdate: String!): String
