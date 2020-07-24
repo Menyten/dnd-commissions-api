@@ -7,6 +7,7 @@ export default {
     const user = await Account.findByCredentials(email, password);
     const token = user.generateAuthToken();
     context.res.setHeader('Set-Cookie', `dnd_commissions=${token}; HttpOnly`);
+    console.log(user);
     return { token, user };
   },
   signOut: async (args, context) => {

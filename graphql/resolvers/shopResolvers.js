@@ -9,11 +9,12 @@ export default {
     const user = await Account.findById(req.userId);
     if (user.role === 'shopkeeper')
       throw new Error('You can only have one shop!');
-    const shop = new Shop({ ...args, shopkeeperId: req.userId });
-    const result = await shop.save().catch(() => {
+    const shop = new Shop({ ...args, owner: req.userId });
+    const result = await shop.save().catch(e => {
       throw new Error('Error creating shop');
     });
     user.role = 'shopkeeper';
+    user.shopId = shop._id;
     await user.save();
     return result;
   },
