@@ -7,5 +7,5 @@ export default /* GraphQL */ `
   
   createShop(shopTitle: String!, shopDescription: String!): Shop!
   updateShop(shopId: String, shopTitle: String, shopDescription: String, shopImage: String): Shop!
-  createProduct(shop: ID!, productTitle: String!, productDescription: String!, price: Float!): [Product!]!
+  addProduct(shop: ID!, productTitle: String!, productDescription: String!, price: Float!): [Product!]!
 `;

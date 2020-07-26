@@ -30,7 +30,7 @@ export default {
       path: 'account',
     });
 
-    const products = await Product.find({ id }, (err, res) => {
+    const products = await Product.find({ shop: id }, (err, res) => {
       if (err) throw new Error('Something went wrong finding products');
       return res;
     });

@@ -19,7 +19,7 @@ export default {
     return product;
   },
 
-  createProduct: async (args, req) => {
+  addProduct: async (args, req) => {
     if (!req.isAuth) throw new Error('Unauthorized');
     const shop = await Shop.findById(args.shop, (err, res) => {
       if (err) throw new Error('Shop not found');
