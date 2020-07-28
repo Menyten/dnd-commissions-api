@@ -1,6 +1,6 @@
 export default /* GraphQL */ `
   login(email: String!, password: String!): User!
-  signOut: String
+  logout: String
 
   createAccount(username: String!, firstname: String!, lastname: String!, email: String!, password: String!, birthdate: String!): String
   createOrder(buyerId: ID!, shopId: ID!, totalPrice: Float!, orderDescription: String!, products: [ID]!): Order!

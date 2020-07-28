@@ -9,9 +9,9 @@ export default {
     context.res.setHeader('Set-Cookie', `dnd_commissions=${token}; HttpOnly`);
     return { token, user };
   },
-  signOut: async (args, context) => {
+  logout: async (args, context) => {
     context.res.clearCookie('dnd_commissions');
-    return;
+    return 'Logged out';
   },
   me: (args, req) => {
     if (!req.isAuth) return;
