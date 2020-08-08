@@ -4,5 +4,5 @@ export default /* GraphQL */ `
   shop(id: ID): Shop!
   accounts: [Account!]
   product(id: ID): Product
-  products(query: String): [Product]
+  products(query: String): [Product!]!
 `;

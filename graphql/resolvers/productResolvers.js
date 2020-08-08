@@ -5,7 +5,9 @@ export default {
   products: async ({ query = '' }) => {
     const products = await Product.find({
       productTitle: { $regex: query, $options: 'i' },
-    }).lean();
+    })
+      .populate('shop')
+      .lean();
     return products;
   },
 
